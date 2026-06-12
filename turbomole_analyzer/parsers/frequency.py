@@ -1,8 +1,9 @@
 import re
 from pathlib import Path
 from typing import Optional
+from turbomole_analyzer.parsers.base import BaseParser
 
-class FrequencyParser:
+class FrequencyParser(BaseParser):
     """Parses TURBOMOLE frequency calculation outputs (aoforce.out / job.last)."""
 
     def parse(self, file_path: Path) -> Optional[float]:
@@ -18,12 +19,14 @@ class FrequencyParser:
             with open(file_path, 'r') as f:
                 content = f.read()
 
-            # Pattern for standard aoforce.out summary blocks
-            # Example: "zero point vibrational energy :    0.541203 Hartree"
-            # Example: "Zero-point vibrational energy:    0.541203 Ha"
+            # Patterns tried in order; most specific first to avoid false positives.
+            # aoforce.out: "zero point vibrational energy :    0.541203 Hartree"
+            # aoforce.out: "vibrational zero-point energy:    0.541203 Ha"
+            # job.last:    "Zero Point Energy :    0.0750000 Hartree"
             patterns = [
                 r"(?:zero[- ]point\s+vibrational\s+energy)\s*:\s*([\-\d\.]+)",
-                r"(?:vibrational\s+zero[- ]point\s+energy)\s*:\s*([\-\d\.]+)"
+                r"(?:vibrational\s+zero[- ]point\s+energy)\s*:\s*([\-\d\.]+)",
+                r"(?:zero[- ]point\s+energy)\s*:\s*([\-\d\.]+)",
             ]
 
             for pattern in patterns:

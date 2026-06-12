@@ -1,10 +1,14 @@
 import re
 from pathlib import Path
 from typing import List, Dict, Any
+from turbomole_analyzer.parsers.base import BaseParser
 
 
-class GradientParser:
+class GradientParser(BaseParser):
     """Parses TURBOMOLE 'gradient' files to reconstruct optimization trajectories."""
+
+    def parse(self, file_path: Path) -> List[List[Dict[str, Any]]]:
+        return self.parse_trajectory(file_path)
 
     def parse_trajectory(self, file_path: Path) -> List[List[Dict[str, Any]]]:
         """

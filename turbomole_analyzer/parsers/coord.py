@@ -52,7 +52,7 @@ class CoordParser(BaseParser):
             if not atoms:
                 return None
 
-            return MolecularGeometry(atoms=atoms, num_atoms=len(atoms))
+            return MolecularGeometry(atoms=atoms)
 
         except Exception as e:
             print(f"Warning: Failed to parse coord file {file_path}. Error: {e}")

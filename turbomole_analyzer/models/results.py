@@ -10,7 +10,10 @@ class Atom(BaseModel):
 
 class MolecularGeometry(BaseModel):
     atoms: List[Atom] = Field(default_factory=list)
-    num_atoms: int = 0
+
+    @property
+    def num_atoms(self) -> int:
+        return len(self.atoms)
 
     def get_distance(self, idx1: int, idx2: int) -> float:
         """Calculate the Euclidean distance between two atoms (0-indexed)."""
@@ -27,6 +30,8 @@ class NMRData(BaseModel):
     # Key: Element (e.g., "H"), Value: Dict mapping atom index string to shielding value
     # Example: {"H": {"1": 31.45, "2": 30.12}, "C": {"3": 135.2}}
     chemical_shifts: Dict[str, Dict[str, float]] = Field(default_factory=dict)
+    # Computed chemical shifts: delta_mol = delta_ref + sigma_ref - sigma_mol
+    delta_shifts: Dict[str, Dict[str, float]] = Field(default_factory=dict)
 
 class JobResults(BaseModel):
     job_id: str
