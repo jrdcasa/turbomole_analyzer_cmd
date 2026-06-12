@@ -1,0 +1,73 @@
+# Python eggs
+*.egg
+*.egg-info/
+.eggs/
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+out/
+target/
+
+# Cache
+.cache/
+.tmp/
+temp/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Java
+*.class
+*.jar
+*.war
+
+# .NET
+bin/
+obj/
+
+# Coverage and test results
+coverage/
+.nyc_output/
+*.coverage
+
+# Package manager files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archives
+*.zip
+*.tar
+*.gz
+*.rar
+
+# Local configuration
+local.settings.json
